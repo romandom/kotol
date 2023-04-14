@@ -1,5 +1,3 @@
-import uuid
-
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
@@ -33,12 +31,12 @@ def get_password_hash(password):
     return pwd_context.hash(password)
 
 
-def get_user(db: Session, user_email: str):
-    return db.query(models.User).filter(models.User.email == user_email).first()
+def get_user(db: Session, username: str):
+    return db.query(models.User).filter(models.User.username == username).first()
 
 
-def authenticate_user(db: Session, email: str, password: str):
-    user = get_user(db, email)
+def authenticate_user(db: Session, username: str, password: str):
+    user = get_user(db, username)
     if not user:
         return False
     if not verify_password(password, user.hashed_password):
@@ -58,11 +56,11 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
 
 
 async def register_user(user: RegisterUser, db: Session = Depends(get_db)):
-    if db.query(models.User).filter(models.User.email == user.username).first() is not None:
+    if db.query(models.User).filter(models.User.username == user.username).first() is not None:
         return {
             "message:": "User already exists"
         }
-    db_user = models.User(id=uuid.uuid4(), email=user.username, hashed_password=pwd_context.hash(user.password),
+    db_user = models.User(username=user.username, hashed_password=pwd_context.hash(user.password),
                           date=datetime.now().strftime("%m/%d/%Y, %H:%M:%S"), is_active=True)
     db.add(db_user)
     db.commit()

@@ -8,11 +8,11 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/kotol_db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="d3vhnkodcdf04h@ec2-52-215-68-14.eu-west-1.compute.amazonaws.com" uuid="c4560df0-e0c1-498f-9b96-1f86895f2dde">
+    <data-source source="LOCAL" name="dkacujkg8ru5h@ec2-54-155-46-64.eu-west-1.compute.amazonaws.com" uuid="c150c306-e63b-40e6-8605-790d24240d0e">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://ec2-52-215-68-14.eu-west-1.compute.amazonaws.com:5432/d3vhnkodcdf04h</jdbc-url>
+      <jdbc-url>jdbc:postgresql://ec2-54-155-46-64.eu-west-1.compute.amazonaws.com:5432/dkacujkg8ru5h</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

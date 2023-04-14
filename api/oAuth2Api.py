@@ -5,12 +5,11 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
-from schema.tokenSchema import Token
 from schema.userSchema import User, UserInDB
 from schema.registerSchema import RegisterUser
 from service.dbService import get_db
 from service.oAuth2Service import authenticate_user, create_access_token, get_current_user, \
-    ACCESS_TOKEN_EXPIRE_MINUTES, register_user, oauth2_scheme
+    ACCESS_TOKEN_EXPIRE_MINUTES, register_user
 
 router = APIRouter(
     tags=["Auth"],
@@ -29,9 +28,9 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
-        data={"sub": user.email}, expires_delta=access_token_expires
+        data={"sub": user.username}, expires_delta=access_token_expires
     )
-    return {"access_token": access_token, "token_type": "bearer", "user_uuid": user.id}
+    return {"access_token": access_token, "token_type": "bearer", "user_id": user.id}
 
 
 @router.post("/register")

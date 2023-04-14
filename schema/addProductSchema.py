@@ -2,5 +2,5 @@ from pydantic import BaseModel
 
 
 class AddProduct(BaseModel):
-    user_uuid: str | None = None
-    product_uuid: str | None = None
+    user_id: str | None = None
+    product_id: str | None = None
